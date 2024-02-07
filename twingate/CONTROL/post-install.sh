@@ -3,15 +3,17 @@
 APKG_PKG_DIR=/usr/local/AppCentral/twingate-docker
 TWINGATE_FOLDER=/share/Docker/$APKG_PKG_NAME
 LOGGING=$TWINGATE_FOLDER/log.txt
-printf "---pre-install---\n" >> $LOGGING
-
-# Make sure configuration folder exists
-if [ ! -d "$TWINGATE_FOLDER" ]; then
-	mkdir "$TWINGATE_FOLDER"
-fi
+printf "---post-install---\n" >> $LOGGING
 
 docker pull twingate/connector:latest
 printf "Completed docker pull\n" >> $LOGGING
+
+# generate environment:
+      - SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+      - TWINGATE_API_ENDPOINT=/connector.stock
+      - TWINGATE_NETWORK=<TENANT NAME>
+      - TWINGATE_ACCESS_TOKEN=<ACCESS TOKEN>
+      - TWINGATE_REFRESH_TOKEN=<REFRESH TOKEN>
 
 case "$APKG_PKG_STATUS" in
 
