@@ -1,32 +1,47 @@
 #!/bin/sh
 
-. /etc/script/lib/command.sh
+TWINGATE_FOLDER=/share/Docker/$APKG_PKG_NAME
+LOGGING=$TWINGATE_FOLDER/log.txt
+printf "---start-stop---\n" >> $LOGGING
 
-APKG_PKG_DIR=/usr/local/AppCentral/sample-custom-apk
-PID_FILE=/var/run/demo-web-server.pid
+echo "start-stop"
 
-JAVA_CMD=/usr/local/bin/java
+printf "start\n" >> $LOGGING
+CONTAINER_NAME=twingate
+printf "Container running\n" >> $LOGGING
+printf "$1\n" >> $LOGGING
 
 case $1 in
 
 	start)
 		# start script here
-		cd $APKG_PKG_DIR/lib/
-		$JAVA_CMD WebServer $APKG_PKG_DIR/webapp/ 7777 > /dev/null &
-		echo $! > $PID_FILE
+    echo "Start $CONTAINER_NAME container..."
+		docker start $CONTAINER_NAME
+    sleep 6
 		;;
 
 	stop)
 		# stop script here
-		kill -9 `cat $PID_FILE` 2> /dev/null
-		rm -rf $PID_FILE
+    echo "Stop $CONTAINER_NAME container..."
+    docker stop $CONTAINER_NAME
+    sleep 6
 		;;
 
+  reload)
+   	echo "Reload $CONTAINER_NAME container..."
+   	docker stop  $CONTAINER_NAME
+   	sleep 6
+   	docker start $CONTAINER_NAME
+   	sleep 6
+    ;;
+
 	*)
-		echo "usage: $0 {start|stop}"
-		exit 1
+    echo "Usage: $0 {start|stop|reload}"
+    exit 1
 		;;
 		
 esac
+
+printf "End\n" >> $LOGGING
 
 exit 0
