@@ -1,1 +1,11 @@
-Sample custom APK demo.
+What is Twingate used for?
+Twingate enables secure access to private resources or SaaS apps where IP-based access or whitelisting is required. Common use cases include connecting to third-party services or apps that restrict access by IP, securing staging servers, or deploying a lightweight cloud security access broker (CASB).
+
+How is Twingate different from a VPN?
+Unlike a VPN, even if you have multiple secure networks, Twingate handles routing to each of them transparently and users don't have to select a specific gateway that would give them access to a specific network.
+
+Notes:
+1. The docker version is maintained by https://hub.docker.com/u/twingate.
+2. Documentation can be found at https://www.twingate.com/docs/guides.
+3. Clients - https://www.twingate.com/docs/clients
+4. Recommended youtube to setup Twingate - https://www.youtube.com/watch?v=yaw2A3DG664
