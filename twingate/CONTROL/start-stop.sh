@@ -7,7 +7,7 @@ printf "---start-stop---\n" >> $LOGGING
 echo "start-stop"
 
 printf "start\n" >> $LOGGING
-CONTAINER_NAME=twingate
+CONTAINER_NAME=twingate-connector
 printf "Container running\n" >> $LOGGING
 printf "$1\n" >> $LOGGING
 
