@@ -1,19 +1,14 @@
 #!/bin/sh
 
-APKG_PKG_DIR=/usr/local/AppCentral/sample-custom-apk
+TWINGATE_FOLDER=/share/Docker/$APKG_PKG_NAME
+LOGGING=$TWINGATE_FOLDER/log.txt
 
-case "$APKG_PKG_STATUS" in
+cd /usr/local/AppCentral/twingate-docker/CONTROL/
 
-	install)
-		# post install script here
-		;;
-	upgrade)
-		# post upgrade script here (restore data)
-		# cp -af $APKG_TEMP_DIR/* $APKG_PKG_DIR/etc/.
-		;;
-	*)
-		;;
+sed -i 's/192\.168\.1\.1/'"$ServerIP"'/g' docker-compose.yml
+sed -i 's/admin/'"$WEBPASSWORD"'/g' docker-compose.yml
+sed -i 's/admin/'"$WEBPASSWORD"'/g' docker-compose.yml
 
-esac
+docker-compose up -d
 
 exit 0
